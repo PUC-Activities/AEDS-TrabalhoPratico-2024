@@ -1,0 +1,7 @@
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\bin\Debug\AEDS_TrabalhoPratico_2024.exe.config
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\bin\Debug\AEDS_TrabalhoPratico_2024.exe
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\bin\Debug\AEDS_TrabalhoPratico_2024.pdb
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\obj\Debug\AEDS_TrabalhoPratico_2024.csproj.AssemblyReference.cache
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\obj\Debug\AEDS_TrabalhoPratico_2024.csproj.CoreCompileInputs.cache
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\obj\Debug\AEDS_TrabalhoPratico_2024.exe
+C:\Users\gabri\OneDrive\Documentos\GitHub\AEDS-TrabalhoPratico-2024\AEDS_TrabalhoPratico_2024\AEDS_TrabalhoPratico_2024\obj\Debug\AEDS_TrabalhoPratico_2024.pdb
