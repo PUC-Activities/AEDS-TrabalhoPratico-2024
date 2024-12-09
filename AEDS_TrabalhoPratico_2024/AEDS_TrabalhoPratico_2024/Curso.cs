@@ -9,27 +9,23 @@ namespace AEDS_TrabalhoPratico_2024
     internal class Curso
     {
         private string nomeCurso;
-        private int codCurso;
-        private int quantVagas;
+        private int codCurso, quantVagas;
         double notaDeCorte;
         private Candidato[] todosCandidatos;
-        private Fila<Candidato> candidatosSelecionados;
-        private Fila<Candidato> filaEspera;
-
-        public Curso(int quantCandidatos)
+        private Fila<Candidato> candidatosSelecionados, filaEspera;
+        public Curso()
         {
             nomeCurso = "";
             codCurso = 0;
             codCurso = 0;
             notaDeCorte = 0;
-            todosCandidatos = new Candidato[quantCandidatos];
-
-        }
-        public Curso()
-        {            
-
         }
 
+        public void InstanciaObj(int quantInscritosCurso)
+        {
+            todosCandidatos = new Candidato[quantInscritosCurso];
+
+        }
         public string NomeCurso
         {
             get { return nomeCurso; }

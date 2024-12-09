@@ -24,6 +24,16 @@ namespace AEDS_TrabalhoPratico_2024
             curso2.CodCurso = 0;
         }
 
+        public Candidato(Candidato candidato)
+        {
+            this.nome = candidato.Nome;
+            this.notaRedacao = candidato.NotaRedacao;
+            this.notaMat = candidato.notaMat;
+            this.notaLing = candidato.NotaLing;
+            this.curso1.CodCurso = candidato.Curso1;
+            this.curso2.CodCurso = candidato.Curso2;
+        }
+
         public string Nome
         {
             get { return nome; }
