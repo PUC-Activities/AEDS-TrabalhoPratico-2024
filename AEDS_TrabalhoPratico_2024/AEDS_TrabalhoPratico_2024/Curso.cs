@@ -22,7 +22,7 @@ namespace AEDS_TrabalhoPratico_2024
             notaDeCorte = 0;
         }
 
-        public void InstanciaObj(List<Candidato> temp)
+        public void InstanciaTodosCandidatos(List<Candidato> temp)
         {
             TodosCandidatos = new Candidato[temp.Count];
             for (int i = 0; i < temp.Count; i++)
@@ -32,6 +32,32 @@ namespace AEDS_TrabalhoPratico_2024
             }
 
         }
+
+        public void InstanciaCandidatosSelecionados(Candidato[] todosCandidatos)
+        {
+            for (int i = 0; i < QuantVagas; i++)
+            {
+                // Cria uma cópia de cada candidato
+                Candidato candidato = new Candidato(todosCandidatos[i]);
+                CandidatosSelecionados[i] = candidato;
+            }
+            
+        }
+        public void InstanciaFilaEspera(Candidato[] todosCandidatos)
+        {
+            int candidatosFilaEspera = todosCandidatos.Length - QuantVagas;
+
+            Fila<Candidato> filaEspera = new Fila<Candidato>(candidatosFilaEspera);
+
+            for (int i = QuantVagas; i < todosCandidatos.Length; i++)
+            {
+                filaEspera.Inserir(todosCandidatos[i]);
+            }
+
+            this.FilaEspera = filaEspera;
+        }
+
+
         public string NomeCurso
         {
             get { return nomeCurso; }
