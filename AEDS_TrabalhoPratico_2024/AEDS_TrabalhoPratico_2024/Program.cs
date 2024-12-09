@@ -17,20 +17,18 @@ namespace AEDS_TrabalhoPratico_2024
 
             while (i <= j)
             {
-                while (array[i].NotaMedia < pivo)
+                while (array[i].NotaMedia > pivo)
                     i++;
-                while (array[j].NotaMedia > pivo)
+                while (array[j].NotaMedia < pivo)
                     j--;
                 if (i <= j)
-                {
-                    {
-                        double temp = array[i].NotaMedia;
-                        array[i] = array[j];
-                        array[j].NotaMedia = temp;
+                {                    
+                    Candidato temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
 
-                        i++;
-                        j--;
-                    }
+                    i++;
+                    j--;
                 }
 
                 if (esq < j)
@@ -39,7 +37,7 @@ namespace AEDS_TrabalhoPratico_2024
                     Quicksort(array, i, dir);
             }
         }
-
+        /*
         static void ExibirSaida(Dictionary<int, Curso> listaCursos)
         {
             for (int i = 0; i < listaCursos.Count; i++)
@@ -50,7 +48,7 @@ namespace AEDS_TrabalhoPratico_2024
                 listaCursos[i].CandidatosSelecionados.Mostrar();
                 listaCursos[i].FilaEspera.Mostrar();
             }
-        }
+        }*/
         static void Main(string[] args)
         {
             int quantCursos = 0, quantCandidatos = 0, countLinhas = 1;
@@ -119,9 +117,11 @@ namespace AEDS_TrabalhoPratico_2024
             for (int i = 0; i < listaCursos.Count; i++)
             {
                 List<Candidato> temp = new List<Candidato>();
+                
 
                 for (int j = 0; j < listaCandidatos.Count; j++)
                 {
+                    
                     if (listaCursos.ElementAt(i).Key == listaCandidatos[j].Curso1)
                     {
                         Candidato c = new Candidato(listaCandidatos[j]);
@@ -136,9 +136,7 @@ namespace AEDS_TrabalhoPratico_2024
                     
                 }
 
-
-                curso.InstanciaObj(temp.Count);
-                temp.CopyTo(listaCursos.ElementAt(i).Value.TodosCandidatos);
+                listaCursos.ElementAt(i).Value.InstanciaObj(temp);
 
             }
 
@@ -147,7 +145,12 @@ namespace AEDS_TrabalhoPratico_2024
 
                 Quicksort(listaCursos.ElementAt(i).Value.TodosCandidatos, 0, listaCursos.ElementAt(i).Value.TodosCandidatos.Length - 1);
 
-                listaCursos[i].NotaDeCorte = listaCursos[i].TodosCandidatos[listaCursos[i].QuantVagas - 1].NotaMedia;              
+                int vagasDisponiveis = listaCursos.ElementAt(i).Value.QuantVagas;
+
+                if (listaCursos.ElementAt(i).Value.TodosCandidatos.Length >= vagasDisponiveis && vagasDisponiveis > 0)
+                {
+                    listaCursos.ElementAt(i).Value.NotaDeCorte = listaCursos.ElementAt(i).Value.TodosCandidatos[vagasDisponiveis - 1].NotaMedia;
+                }
 
             }
 
@@ -196,14 +199,14 @@ namespace AEDS_TrabalhoPratico_2024
                     {
                         if (listaCandidatos[i].Curso1 == listaCursos[h].CodCurso)
                         {
-                            listaCursos[h].CandidatosSelecionados.Inserir(listaCandidatos[i]);
+                            listaCursos[h].CandidatosSelecionados.Add(listaCandidatos[i]);
                         }
                     }
                     else if (c1 == true && c2 == false)
                     {
                         if (listaCandidatos[i].Curso1 == listaCursos[h].CodCurso)
                         {
-                            listaCursos[h].CandidatosSelecionados.Inserir(listaCandidatos[i]);
+                            listaCursos[h].CandidatosSelecionados.Add(listaCandidatos[i]);
                         }
                         else if (listaCandidatos[i].Curso2 == listaCursos[h].CodCurso)
                         {
@@ -214,7 +217,7 @@ namespace AEDS_TrabalhoPratico_2024
                     {                        
                         if (listaCandidatos[i].Curso2 == listaCursos[h].CodCurso)
                         {
-                            listaCursos[i].CandidatosSelecionados.Inserir(listaCandidatos[i]);
+                            listaCursos[i].CandidatosSelecionados.Add(listaCandidatos[i]);
                         }
                         else if (listaCandidatos[i].Curso1 == listaCursos[h].CodCurso)
                         {
@@ -239,7 +242,7 @@ namespace AEDS_TrabalhoPratico_2024
             {
                 StreamWriter arqSaida = new StreamWriter("saida.txt", false, Encoding.UTF8);
 
-                ExibirSaida(listaCursos);                
+                //ExibirSaida(listaCursos);                
 
                 arqSaida.Close();
             }

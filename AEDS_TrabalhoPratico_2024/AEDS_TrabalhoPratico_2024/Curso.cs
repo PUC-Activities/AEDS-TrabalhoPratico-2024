@@ -12,7 +12,8 @@ namespace AEDS_TrabalhoPratico_2024
         private int codCurso, quantVagas;
         double notaDeCorte;
         private Candidato[] todosCandidatos;
-        private Fila<Candidato> candidatosSelecionados, filaEspera;
+        private Fila<Candidato> filaEspera;
+        private List<Candidato> candidatosSelecionados;
         public Curso()
         {
             nomeCurso = "";
@@ -21,9 +22,14 @@ namespace AEDS_TrabalhoPratico_2024
             notaDeCorte = 0;
         }
 
-        public void InstanciaObj(int quantInscritosCurso)
+        public void InstanciaObj(List<Candidato> temp)
         {
-            todosCandidatos = new Candidato[quantInscritosCurso];
+            TodosCandidatos = new Candidato[temp.Count];
+            for (int i = 0; i < temp.Count; i++)
+            {
+                Candidato candidato = new Candidato(temp[i]);
+                TodosCandidatos[i] = candidato;
+            }
 
         }
         public string NomeCurso
@@ -55,7 +61,7 @@ namespace AEDS_TrabalhoPratico_2024
             get { return todosCandidatos; }
             set { todosCandidatos = value; }
         }
-        public Fila<Candidato> CandidatosSelecionados
+        public List<Candidato> CandidatosSelecionados
         {
             get { return candidatosSelecionados; }
             set { candidatosSelecionados = value; }

@@ -30,6 +30,7 @@ namespace AEDS_TrabalhoPratico_2024
             this.notaRedacao = candidato.NotaRedacao;
             this.notaMat = candidato.notaMat;
             this.notaLing = candidato.NotaLing;
+            this.notaMedia = candidato.NotaMedia;
             this.curso1.CodCurso = candidato.Curso1;
             this.curso2.CodCurso = candidato.Curso2;
         }
