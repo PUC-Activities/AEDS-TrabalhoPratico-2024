@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\aeds_trabalhopratico_2024\\candidato.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|solutionrelative:aeds_trabalhopratico_2024\\candidato.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\aeds_trabalhopratico_2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|solutionrelative:aeds_trabalhopratico_2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\aeds_trabalhopratico_2024\\curso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,10 +13,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\aeds_trabalhopratico_2024\\fila.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|solutionrelative:aeds_trabalhopratico_2024\\fila.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|c:\\users\\gabri\\onedrive\\documentos\\github\\aeds-trabalhopratico-2024\\aeds_trabalhopratico_2024\\aeds_trabalhopratico_2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5C053FFD-E21A-49D6-B257-4DA6C9976578}|AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024.csproj|solutionrelative:aeds_trabalhopratico_2024\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,10 +32,9 @@
               "RelativeDocumentMoniker": "AEDS_TrabalhoPratico_2024\\Fila.cs",
               "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Fila.cs",
               "RelativeToolTip": "AEDS_TrabalhoPratico_2024\\Fila.cs",
-              "ViewState": "AQIAADEAAAAAAAAAAAAIwDYAAAAJAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAgwA8AAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T18:46:55.572Z",
-              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -50,7 +45,7 @@
               "RelativeDocumentMoniker": "AEDS_TrabalhoPratico_2024\\Curso.cs",
               "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Curso.cs",
               "RelativeToolTip": "AEDS_TrabalhoPratico_2024\\Curso.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAYwCMAAAAzAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAAwC0AAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T01:15:24.638Z",
               "EditorCaption": ""
@@ -58,25 +53,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Candidato.cs",
-              "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Candidato.cs",
-              "RelativeDocumentMoniker": "AEDS_TrabalhoPratico_2024\\Candidato.cs",
-              "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Candidato.cs",
-              "RelativeToolTip": "AEDS_TrabalhoPratico_2024\\Candidato.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAwBwAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-07T01:15:40.993Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Program.cs",
               "RelativeDocumentMoniker": "AEDS_TrabalhoPratico_2024\\Program.cs",
               "ToolTip": "C:\\Users\\gabri\\OneDrive\\Documentos\\GitHub\\AEDS-TrabalhoPratico-2024\\AEDS_TrabalhoPratico_2024\\AEDS_TrabalhoPratico_2024\\Program.cs",
               "RelativeToolTip": "AEDS_TrabalhoPratico_2024\\Program.cs",
-              "ViewState": "AQIAAPYAAAAAAAAAAAAcwAsBAAABAAAA",
+              "ViewState": "AQIAAPIAAAAAAAAAAAAUwAABAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-07T01:14:35.059Z",
               "EditorCaption": ""

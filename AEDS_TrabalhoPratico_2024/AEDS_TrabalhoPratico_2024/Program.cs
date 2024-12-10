@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace AEDS_TrabalhoPratico_2024
     {
         static void Quicksort(Candidato[] array, int esq, int dir)
         {
-            int i = esq, j = dir; 
+            int i = esq, j = dir;
             double pivo = array[(esq + dir) / 2].NotaMedia;
 
             while (i <= j)
@@ -22,7 +23,7 @@ namespace AEDS_TrabalhoPratico_2024
                 while (array[j].NotaMedia < pivo)
                     j--;
                 if (i <= j)
-                {                    
+                {
                     Candidato temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
@@ -37,22 +38,26 @@ namespace AEDS_TrabalhoPratico_2024
                     Quicksort(array, i, dir);
             }
         }
-        
+
         static void ExibirSaida(Dictionary<int, Curso> listaCursos)
         {
             for (int i = 0; i < listaCursos.Count; i++)
             {
-                Console.WriteLine($"{listaCursos[i].NomeCurso} {listaCursos[i].NotaDeCorte}");
+                Console.WriteLine($"{listaCursos.ElementAt(i).Value.NomeCurso} {listaCursos.ElementAt(i).Value.NotaDeCorte}");
                 Console.WriteLine("Selecionados");
 
                 for (int j = 0; j < listaCursos.ElementAt(i).Value.CandidatosSelecionados.Count; i++)
-                { 
-                    //consertar essa impressão para mostrar todos os dados dos candidatos que foram pedidos 
-                    Console.WriteLine(listaCursos.ElementAt(j).Value.CandidatosSelecionados);
+                {
+                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].Nome + " ");
+                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaMedia + " ");
+                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaRedacao + " ");
+                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaMat + " ");
+                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaLing + " ");
+                    Console.WriteLine();
 
                 }
-                
-                listaCursos.ElementAt(j).Value.FilaEspera.Mostrar();
+
+                listaCursos.ElementAt(i).Value.FilaEspera.Mostrar();
             }
         }
         static void Main(string[] args)
@@ -80,9 +85,9 @@ namespace AEDS_TrabalhoPratico_2024
                     if (countLinhas == 1)
                     {
                         quantCursos = int.Parse(informacoesArq[0]);
-                        quantCandidatos = int.Parse(informacoesArq[1]);                        
+                        quantCandidatos = int.Parse(informacoesArq[1]);
 
-                    }                    
+                    }
                     else if (countLinhas > 1 && countLinhas <= quantCursos + 1)
                     {
                         curso = new Curso();
@@ -93,16 +98,16 @@ namespace AEDS_TrabalhoPratico_2024
 
                         listaCursos.Add(curso.CodCurso, curso);
                     }
-                    else if(countLinhas > quantCursos + 1 || countLinhas <= quantCursos + quantCandidatos + 1)
+                    else if (countLinhas > quantCursos + 1 || countLinhas <= quantCursos + quantCandidatos + 1)
                     {
                         aluno = new Candidato();
-                        aluno.Nome = informacoesArq[0];                     
+                        aluno.Nome = informacoesArq[0];
                         aluno.NotaRedacao = double.Parse(informacoesArq[1]);
                         aluno.NotaLing = double.Parse(informacoesArq[2]);
                         aluno.NotaMat = double.Parse(informacoesArq[3]);
                         aluno.Curso1 = int.Parse(informacoesArq[4]);
                         aluno.Curso2 = int.Parse(informacoesArq[5]);
-                        aluno.NotaMedia = Math.Round(((aluno.NotaRedacao + aluno.NotaLing + aluno.NotaMat) / 3), 2); 
+                        aluno.NotaMedia = Math.Round(((aluno.NotaRedacao + aluno.NotaLing + aluno.NotaMat) / 3), 2);
 
                         listaCandidatos.Add(aluno);
 
@@ -123,11 +128,11 @@ namespace AEDS_TrabalhoPratico_2024
             for (int i = 0; i < listaCursos.Count; i++)
             {
                 List<Candidato> temp = new List<Candidato>();
-                
+
 
                 for (int j = 0; j < listaCandidatos.Count; j++)
                 {
-                    
+
                     if (listaCursos.ElementAt(i).Key == listaCandidatos[j].Curso1)
                     {
                         Candidato c = new Candidato(listaCandidatos[j]);
@@ -139,7 +144,7 @@ namespace AEDS_TrabalhoPratico_2024
                         Candidato c = new Candidato(listaCandidatos[j]);
                         temp.Add(c);
                     }
-                    
+
                 }
 
                 listaCursos.ElementAt(i).Value.InstanciaTodosCandidatos(temp);
@@ -148,121 +153,124 @@ namespace AEDS_TrabalhoPratico_2024
 
             for (int i = 0; i < listaCursos.Count; i++)
             {
-
                 Quicksort(listaCursos.ElementAt(i).Value.TodosCandidatos, 0, listaCursos.ElementAt(i).Value.TodosCandidatos.Length - 1);
-
-                int vagasDisponiveis = listaCursos.ElementAt(i).Value.QuantVagas;
-
-                if (listaCursos.ElementAt(i).Value.TodosCandidatos.Length >= vagasDisponiveis && vagasDisponiveis > 0)
-                {
-                    listaCursos.ElementAt(i).Value.NotaDeCorte = listaCursos.ElementAt(i).Value.TodosCandidatos[vagasDisponiveis - 1].NotaMedia;
-                }
-
             }
+
 
             for (int i = 0; i < listaCandidatos.Count; i++)
             {
-                bool c1 = true, c2 = true;
+                bool c1 = false, c2 = false;
+                double notaUltimoCandidato = i == 0 ? notaUltimoCandidato = 0 : notaUltimoCandidato = listaCandidatos[i - 1].NotaMedia;
 
                 for (int j = 0; j < listaCursos.Count; j++)
                 {
+
+                    listaCursos.ElementAt(j).Value.NotaDeCorte = notaUltimoCandidato;
                     if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(j).Value.CodCurso)
                     {
-                        if(listaCandidatos[i].NotaMedia < listaCursos.ElementAt(j).Value.NotaDeCorte) { 
-                            c1 = false;
-                        }
-                        else
+                        if (notaUltimoCandidato == listaCandidatos[i].NotaMedia)
                         {
-                            if ((i + 1) <= (listaCandidatos.Count) && (listaCandidatos[i].NotaMedia == listaCandidatos[i + 1].NotaMedia))
+                            if (listaCandidatos[i - 1].NotaRedacao == listaCandidatos[i].NotaRedacao)
                             {
-                                c1 = listaCandidatos[i].NotaRedacao > listaCandidatos[i + 1].NotaRedacao;
-
+                                if (listaCandidatos[i - 1].NotaRedacao < listaCandidatos[i].NotaRedacao)
+                                {
+                                    c1 = true;
+                                }
                             }
-
+                        }
+                        else if (notaUltimoCandidato < listaCandidatos[i].NotaMedia && listaCandidatos[i].NotaMedia < listaCursos.ElementAt(j).Value.NotaDeCorte)
+                        {
+                            c1 = true;
                         }
                     }
                     if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(j).Value.CodCurso)
                     {
-                        if (listaCandidatos[i].NotaMedia < listaCursos.ElementAt(j).Value.NotaDeCorte)
+                        if (notaUltimoCandidato == listaCandidatos[i].NotaMedia)
                         {
-                            c2 = false;
-                        }
-                        else
-                        {
-                            if ((i + 1) <= (listaCandidatos.Count) && (listaCandidatos[i].NotaMedia == listaCandidatos[i + 1].NotaMedia))
+                            if (listaCandidatos[i - 1].NotaRedacao == listaCandidatos[i].NotaRedacao)
                             {
-                                c2 = listaCandidatos[i].NotaRedacao > listaCandidatos[i + 1].NotaRedacao;
-
+                                if (listaCandidatos[i - 1].NotaRedacao < listaCandidatos[i].NotaRedacao)
+                                {
+                                    c2 = true;
+                                }
                             }
+                        }
+                        else if (notaUltimoCandidato < listaCandidatos[i].NotaMedia && listaCandidatos[i].NotaMedia < listaCursos.ElementAt(j).Value.NotaDeCorte)
+                        {
+                            c2 = true;
                         }
                     }
 
                 }
 
-                //mexer daqui pra baixo 
-
                 for (int h = 0; h < listaCursos.Count; h++)
                 {
-                    //instaciar a fila de espera e a lista de candidatos selecionados antes de depurar esse trecho, se não vai tomar erro de null exception
-
                     if (c1 == true && c2 == true)
                     {
                         if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
-                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
                         }
                     }
                     else if (c1 == true && c2 == false)
                     {
                         if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
-                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
                         }
-                        else if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(i).Value.CodCurso)
+                        else if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
+                            listaCursos.ElementAt(h).Value.InstanciaFilaEspera();
                             listaCursos.ElementAt(h).Value.FilaEspera.Inserir(listaCandidatos[i]);
+
                         }
                     }
                     else if (c1 == false && c2 == true)
-                    {                        
+                    {
                         if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
-                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
                         }
                         else if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
+                            listaCursos.ElementAt(h).Value.InstanciaFilaEspera();
                             listaCursos.ElementAt(h).Value.FilaEspera.Inserir(listaCandidatos[i]);
+
                         }
                     }
                     else if (c1 == false && c2 == false)
                     {
                         if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
+                            listaCursos.ElementAt(h).Value.InstanciaFilaEspera();
                             listaCursos.ElementAt(h).Value.FilaEspera.Inserir(listaCandidatos[i]);
                         }
                         else if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
+                            listaCursos.ElementAt(h).Value.InstanciaFilaEspera();
                             listaCursos.ElementAt(h).Value.FilaEspera.Inserir(listaCandidatos[i]);
+
                         }
                     }
-                }                
+                }
             }
 
             try
             {
                 StreamWriter arqSaida = new StreamWriter("saida.txt", false, Encoding.UTF8);
 
-                //ExibirSaida(listaCursos);                
+                ExibirSaida(listaCursos);
 
                 arqSaida.Close();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Erro ao abrir ou criar o arquivo: " + ex.Message);
+                Console.WriteLine("Erro: " + ex.Message);
             }
 
 
             Console.ReadLine();
+            }
         }
     }
-}
+

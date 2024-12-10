@@ -19,7 +19,7 @@ namespace AEDS_TrabalhoPratico_2024
             nomeCurso = "";
             codCurso = 0;
             codCurso = 0;
-            notaDeCorte = 0;
+            notaDeCorte = 1000000;
         }
 
         public void InstanciaTodosCandidatos(List<Candidato> temp)
@@ -33,30 +33,24 @@ namespace AEDS_TrabalhoPratico_2024
 
         }
 
-        public void InstanciaCandidatosSelecionados(Candidato[] todosCandidatos)
+        public void InstanciaCandidatosSelecionados(Candidato candidato)
         {
-            for (int i = 0; i < QuantVagas; i++)
+            candidatosSelecionados = new List<Candidato>();
+            Candidato candidato1 = new Candidato(candidato);
+            CandidatosSelecionados.Add(candidato1);
+
+        }
+        public void InstanciaFilaEspera()
+        {
+            int tamanhoFila = Math.Max(TodosCandidatos.Length - QuantVagas, 1);
+            FilaEspera = new Fila<Candidato>(tamanhoFila);
+
+            for (int i = 0; i < FilaEspera.ObterTamanho(); i++)
             {
-                // Cria uma cópia de cada candidato
-                Candidato candidato = new Candidato(todosCandidatos[i]);
-                CandidatosSelecionados[i] = candidato;
+                Candidato candidato1 = new Candidato();
             }
             
         }
-        public void InstanciaFilaEspera(Candidato[] todosCandidatos)
-        {
-            int candidatosFilaEspera = todosCandidatos.Length - QuantVagas;
-
-            Fila<Candidato> filaEspera = new Fila<Candidato>(candidatosFilaEspera);
-
-            for (int i = QuantVagas; i < todosCandidatos.Length; i++)
-            {
-                filaEspera.Inserir(todosCandidatos[i]);
-            }
-
-            this.FilaEspera = filaEspera;
-        }
-
 
         public string NomeCurso
         {
