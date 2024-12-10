@@ -39,27 +39,44 @@ namespace AEDS_TrabalhoPratico_2024
             }
         }
 
-        static void ExibirSaida(Dictionary<int, Curso> listaCursos)
+        static bool VerificaListaSelecionados(int quant, int limiteMaximo)
+        {
+            bool possuiEspaco = quant < limiteMaximo;
+            return possuiEspaco;
+        }
+
+        static void ExibirSaida(Dictionary<int, Curso> listaCursos, StreamWriter arqSaida)
         {
             for (int i = 0; i < listaCursos.Count; i++)
             {
+                
                 Console.WriteLine($"{listaCursos.ElementAt(i).Value.NomeCurso} {listaCursos.ElementAt(i).Value.NotaDeCorte}");
-                Console.WriteLine("Selecionados");
+                arqSaida.WriteLine($"{listaCursos.ElementAt(i).Value.NomeCurso} {listaCursos.ElementAt(i).Value.NotaDeCorte}");
 
-                for (int j = 0; j < listaCursos.ElementAt(i).Value.CandidatosSelecionados.Count; i++)
+                arqSaida.WriteLine("Selecionados");
+
+                for (int j = 0; j < listaCursos.ElementAt(i).Value.CandidatosSelecionados.Count; j++)
                 {
-                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].Nome + " ");
-                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaMedia + " ");
-                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaRedacao + " ");
-                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaMat + " ");
-                    Console.Write(listaCursos.ElementAt(j).Value.CandidatosSelecionados[i].NotaLing + " ");
-                    Console.WriteLine();
+                    Candidato temp = listaCursos.ElementAt(i).Value.CandidatosSelecionados[j];
 
+                    Console.WriteLine($"{temp.Nome} {temp.NotaMedia} {temp.NotaRedacao} {temp.NotaMat} {temp.NotaLing}");
+                    arqSaida.WriteLine($"{temp.Nome} {temp.NotaMedia} {temp .NotaRedacao} {temp.NotaMat} {temp.NotaLing}");
                 }
 
-                listaCursos.ElementAt(i).Value.FilaEspera.Mostrar();
+                Console.WriteLine("Fila de Espera: ");
+                arqSaida.WriteLine("Fila de Espera:");
+
+                if (listaCursos.ElementAt(i).Value.FilaEspera.ObterTamanho()  != 0)
+                {
+                    listaCursos.ElementAt(i).Value.FilaEspera.Mostrar();
+                }
+                
+
+                Console.WriteLine();
+                arqSaida.WriteLine();
             }
         }
+
         static void Main(string[] args)
         {
             int quantCursos = 0, quantCandidatos = 0, countLinhas = 1;
@@ -156,16 +173,104 @@ namespace AEDS_TrabalhoPratico_2024
                 Quicksort(listaCursos.ElementAt(i).Value.TodosCandidatos, 0, listaCursos.ElementAt(i).Value.TodosCandidatos.Length - 1);
             }
 
+            for (int i = 0; i < listaCursos.Count; i++) { 
 
-            for (int i = 0; i < listaCandidatos.Count; i++)
+                listaCursos.ElementAt(i).Value.InstanciaCandidatosSelecionados();
+                listaCursos.ElementAt(i).Value.InstanciaFilaEspera();
+
+                for (int j = 0; j < listaCursos.ElementAt(i).Value.TodosCandidatos.Length; j++)
+                    {
+
+                        bool possuiEspaco = VerificaListaSelecionados(listaCursos.ElementAt(i).Value.CandidatosSelecionados.Count, listaCursos.ElementAt(i).Value.QuantVagas);
+
+                        if (listaCursos.ElementAt(i).Value.TodosCandidatos[j].PassouNoCurso == false)
+                        {
+                            if(possuiEspaco == true)
+                            {
+                                listaCursos.ElementAt(i).Value.CandidatosSelecionados.Add(listaCursos.ElementAt(i).Value.TodosCandidatos[j]);
+                                listaCursos.ElementAt(i).Value.NotaDeCorte = listaCursos.ElementAt(i).Value.TodosCandidatos[j].NotaMedia;
+
+                                listaCursos.ElementAt(i).Value.TodosCandidatos[j].PassouNoCurso = true;
+                            }
+                            else if(possuiEspaco == false)
+                            {
+                                listaCursos.ElementAt(i).Value.FilaEspera.Inserir(listaCursos.ElementAt(i).Value.TodosCandidatos[j]);
+                            }
+                            
+                        }
+                        else if(possuiEspaco == false && listaCursos.ElementAt(i).Value.TodosCandidatos.Length != j && listaCursos.ElementAt(i).Value.TodosCandidatos[j].PassouNoCurso == true)
+                        {
+                            listaCursos.ElementAt(i).Value.FilaEspera.Inserir(listaCursos.ElementAt(i).Value.TodosCandidatos[j]);
+                        }
+                    }
+            }
+
+
+
+            try{
+
+                StreamWriter arqSaida = new StreamWriter("saida.txt", false, Encoding.UTF8);
+
+                ExibirSaida(listaCursos, arqSaida);
+
+                arqSaida.Close();
+            }
+            catch (Exception ex)
             {
-                bool c1 = false, c2 = false;
-                double notaUltimoCandidato = i == 0 ? notaUltimoCandidato = 0 : notaUltimoCandidato = listaCandidatos[i - 1].NotaMedia;
+                Console.WriteLine("Erro: " + ex.Message);
+            }
+
+
+            Console.ReadLine();
+            }
+        }
+    }
+
+
+/*
+            
+
+            /*for (int i = 0; i < listaCursos.Count; i++)
+            {
+                bool possuiEspaco = VerificaListaSelecionados(listaCursos.ElementAt(i).Value.TodosCandidatos);
+
+                for (int j = 0; j < listaCursos.ElementAt(i).Value.TodosCandidatos.Length; j++)
+                {
+                    if (listaCursos.ElementAt(i).Value.TodosCandidatos[j].PassouNoCurso == false && possuiEspaco == true)
+                    {
+                        listaCursos.ElementAt(i).Value.InstanciaCandidatosSelecionados(listaCursos.ElementAt(i).Value.TodosCandidatos[i]);
+                        listaCursos.ElementAt(i).Value.CandidatosSelecionados.Add(listaCursos.ElementAt(i).Value.TodosCandidatos[i]);
+
+                        listaCursos.ElementAt(i).Value.TodosCandidatos[i].PassouNoCurso = true;
+                    }
+                    else
+                    {
+                        listaCursos.ElementAt(i).Value.InstanciaFilaEspera();
+                        listaCursos.ElementAt(i).Value.FilaEspera.Inserir(listaCursos.ElementAt(i).Value.TodosCandidatos[i]);
+                    }
+                }
+            }
+
+
+
+
+
+
+
+
+
+for (int i = 0; i < listaCursos.ElementAt(i).Value.TodosCandidatos; i++)
+            {
+                bool c1 = false, c2 = false; 
+                double notaUltimoCandidato = 0;
+
+                if (i != 0)
+                {
+                    notaUltimoCandidato = listaCandidatos[i - 1].NotaMedia;
+                }
 
                 for (int j = 0; j < listaCursos.Count; j++)
                 {
-
-                    listaCursos.ElementAt(j).Value.NotaDeCorte = notaUltimoCandidato;
                     if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(j).Value.CodCurso)
                     {
                         if (notaUltimoCandidato == listaCandidatos[i].NotaMedia)
@@ -195,13 +300,19 @@ namespace AEDS_TrabalhoPratico_2024
                                 }
                             }
                         }
+
                         else if (notaUltimoCandidato < listaCandidatos[i].NotaMedia && listaCandidatos[i].NotaMedia < listaCursos.ElementAt(j).Value.NotaDeCorte)
                         {
                             c2 = true;
                         }
                     }
 
+                    listaCursos.ElementAt(j).Value.NotaDeCorte = notaUltimoCandidato;
                 }
+
+                Console.WriteLine(listaCandidatos[i].Nome);
+                Console.WriteLine(c1);
+                Console.WriteLine(c2);
 
                 for (int h = 0; h < listaCursos.Count; h++)
                 {
@@ -210,6 +321,7 @@ namespace AEDS_TrabalhoPratico_2024
                         if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
                             listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
                         }
                     }
                     else if (c1 == true && c2 == false)
@@ -217,6 +329,8 @@ namespace AEDS_TrabalhoPratico_2024
                         if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
                             listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
+
                         }
                         else if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
@@ -230,6 +344,8 @@ namespace AEDS_TrabalhoPratico_2024
                         if (listaCandidatos[i].Curso2 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
                             listaCursos.ElementAt(h).Value.InstanciaCandidatosSelecionados(listaCandidatos[i]);
+                            listaCursos.ElementAt(h).Value.CandidatosSelecionados.Add(listaCandidatos[i]);
+
                         }
                         else if (listaCandidatos[i].Curso1 == listaCursos.ElementAt(h).Value.CodCurso)
                         {
@@ -253,24 +369,5 @@ namespace AEDS_TrabalhoPratico_2024
                         }
                     }
                 }
-            }
 
-            try
-            {
-                StreamWriter arqSaida = new StreamWriter("saida.txt", false, Encoding.UTF8);
-
-                ExibirSaida(listaCursos);
-
-                arqSaida.Close();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Erro: " + ex.Message);
-            }
-
-
-            Console.ReadLine();
-            }
-        }
-    }
-
+            }*/

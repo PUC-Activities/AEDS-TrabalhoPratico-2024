@@ -19,7 +19,7 @@ namespace AEDS_TrabalhoPratico_2024
             nomeCurso = "";
             codCurso = 0;
             codCurso = 0;
-            notaDeCorte = 1000000;
+            notaDeCorte = 0;
         }
 
         public void InstanciaTodosCandidatos(List<Candidato> temp)
@@ -33,11 +33,9 @@ namespace AEDS_TrabalhoPratico_2024
 
         }
 
-        public void InstanciaCandidatosSelecionados(Candidato candidato)
+        public void InstanciaCandidatosSelecionados()
         {
             candidatosSelecionados = new List<Candidato>();
-            Candidato candidato1 = new Candidato(candidato);
-            CandidatosSelecionados.Add(candidato1);
 
         }
         public void InstanciaFilaEspera()
@@ -45,11 +43,6 @@ namespace AEDS_TrabalhoPratico_2024
             int tamanhoFila = Math.Max(TodosCandidatos.Length - QuantVagas, 1);
             FilaEspera = new Fila<Candidato>(tamanhoFila);
 
-            for (int i = 0; i < FilaEspera.ObterTamanho(); i++)
-            {
-                Candidato candidato1 = new Candidato();
-            }
-            
         }
 
         public string NomeCurso
@@ -92,6 +85,6 @@ namespace AEDS_TrabalhoPratico_2024
             get { return filaEspera; }
             set { filaEspera = value; }
         }
-
     }
 }
+

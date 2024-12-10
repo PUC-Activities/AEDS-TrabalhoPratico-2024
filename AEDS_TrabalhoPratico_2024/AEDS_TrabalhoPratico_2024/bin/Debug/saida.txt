@@ -1,0 +1,26 @@
+﻿Matemática 733,33
+Selecionados
+Mickey Mouse 766,67 800 800 700
+Pato Donald 733,33 700 800 700
+Fila de Espera:
+
+Física 733,33
+Selecionados
+Mickey Mouse 766,67 800 800 700
+Pato Donald 733,33 700 800 700
+Fila de Espera:
+
+Química 783,33
+Selecionados
+Deadpool 800 900 800 700
+Peter Parker 783,33 700 800 850
+Fila de Espera:
+
+Estatística 566,67
+Selecionados
+Deadpool 800 900 800 700
+Peter Parker 783,33 700 800 850
+Tio Patinhas 666,67 700 600 700
+Super Mario Bros 566,67 600 500 600
+Fila de Espera:
+

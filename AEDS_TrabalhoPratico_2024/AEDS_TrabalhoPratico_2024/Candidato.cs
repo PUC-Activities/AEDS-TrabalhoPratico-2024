@@ -10,6 +10,7 @@ namespace AEDS_TrabalhoPratico_2024
     {
         private string nome;
         private double notaRedacao, notaMat, notaLing, notaMedia;
+        bool passouNoCurso;
 
         Curso curso1 = new Curso();
         Curso curso2 = new Curso();
@@ -22,6 +23,7 @@ namespace AEDS_TrabalhoPratico_2024
             notaLing = 0;
             curso1.CodCurso = 0;
             curso2.CodCurso = 0;
+            passouNoCurso = false;
         }
 
         public Candidato(Candidato candidato)
@@ -33,6 +35,7 @@ namespace AEDS_TrabalhoPratico_2024
             this.notaMedia = candidato.NotaMedia;
             this.curso1.CodCurso = candidato.Curso1;
             this.curso2.CodCurso = candidato.Curso2;
+            this.passouNoCurso = candidato.PassouNoCurso;
         }
 
         public string Nome
@@ -69,6 +72,12 @@ namespace AEDS_TrabalhoPratico_2024
         {
             get { return curso2.CodCurso; }
             set { curso2.CodCurso = value; }
+        }
+
+        public bool PassouNoCurso
+        {
+            get { return passouNoCurso; }
+            set { passouNoCurso = value; }
         }
 
     }

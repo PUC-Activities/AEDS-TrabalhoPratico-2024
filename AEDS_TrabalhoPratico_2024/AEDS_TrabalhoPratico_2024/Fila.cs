@@ -62,6 +62,5 @@ namespace AEDS_TrabalhoPratico_2024
             }
 
         }
-
     }
 }
