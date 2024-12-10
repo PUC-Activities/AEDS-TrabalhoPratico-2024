@@ -35,7 +35,7 @@ namespace AEDS_TrabalhoPratico_2024
 
         public void InstanciaCandidatosSelecionados()
         {
-            candidatosSelecionados = new List<Candidato>();
+            CandidatosSelecionados = new List<Candidato>();
 
         }
         public void InstanciaFilaEspera()
